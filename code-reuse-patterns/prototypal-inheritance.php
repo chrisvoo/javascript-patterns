@@ -1,23 +1,32 @@
-﻿<!doctype html>
+﻿<?php 
+	$basedir = realpath(dirname(__FILE__)."/../");
+	$curfile = $basedir.$_SERVER['PHP_SELF'];
+	include "$basedir/include/funcs.php"; 
+?>
+<!doctype html>
 <html lang="en">
 	<head>
-		<title>JavaScript Patterns</title>
+		<title>JavaScript Patterns - Prototypal Inheritance</title>
 		<meta charset="utf-8">
+		<?php echo $sh; ?>
+		<link rel="stylesheet" type="text/css" href="/include/style.css" />
 	</head>
 	<body>
-		<script>
+		<pre class="brush: js">
+			<?php generate_sh_code($curfile); ?>
+		</pre>
+		<script type="text/javascript">//<![CDATA[
 			/* Title: Prototypal Inheritance
-			 Description: objects inherit from other objects
-			 */
+			 * Description: objects inherit from other objects
+		     * Reference: http://shop.oreilly.com/product/9780596806767.do */
 
 			function object(o) {
-				function F() {
-				}
+				function F() { }
 
 				F.prototype = o;
 				return new F();
 			}
-
+			
 			// object to inherit from
 			var parent = {
 				name:"Papa"
@@ -65,15 +74,16 @@
 
 			/* Addition to ECMAScript 5 */
 			var child = Object.create(parent);
+			console.info(child);
 
 			var child = Object.create(parent, {
 				age:{ value:2 } // ECMA5 descriptor
 			});
 			console.log(child.hasOwnProperty("age")); // true
-
-
-			// reference
-			// http://shop.oreilly.com/product/9780596806767.do
+		//]]>
 		</script>
+		<script type="text/javascript">
+		     SyntaxHighlighter.all()
+		</script>		
 	</body>
 </html>
